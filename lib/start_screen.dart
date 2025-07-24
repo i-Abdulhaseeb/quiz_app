@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
 
 class BuildBackgroundWidget extends StatelessWidget {
-  void PressME() {}
+  const BuildBackgroundWidget({super.key});
+  void pressMe() {}
   @override
   Widget build(context) {
     return Container(
-      decoration: const BoxDecoration(color: Colors.purple),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(colors: [
+          Colors.deepPurple,
+          Color.fromARGB(255, 82, 39, 155),
+        ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+      ),
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('assets/images/quiz-logo.png', width: 200),
+            Image.asset(
+              'assets/images/quiz-logo.png',
+              width: 200,
+            ),
             const SizedBox(height: 20),
             const Text("Learn Flutter the Fun Way!",
                 style: TextStyle(color: Colors.white, fontSize: 25)),
             const SizedBox(height: 20),
             OutlinedButton(
-              onPressed: PressME,
+              onPressed: pressMe,
               style: OutlinedButton.styleFrom(
                   backgroundColor: Colors.purple,
                   foregroundColor: Colors.white),
-              child: const Text("Start Quiz"),
+              child: const Text("-> Start Quiz",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             ),
           ],
         ),
