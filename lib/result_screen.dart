@@ -20,18 +20,24 @@ class ResultScreen extends StatelessWidget {
 
   final void Function() function1;
   final List<String> answers;
+
   @override
   Widget build(context) {
+    final totalQ = questionsNumber.length;
+    final summaryData = getSummaryData();
+    final correctAnswersChoosen = summaryData.where((data) {
+      return data['user_answer'] == data['correct_answer'];
+    }).length;
     return Center(
       child: Container(
         margin: const EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+
           children: [
             Text(
-              "You answered X out of Y questions correct",
+              'You answered $correctAnswersChoosen out of $totalQ questions correctly',
               textAlign: TextAlign.center,
               style: GoogleFonts.lato(
                 color: const Color.fromARGB(191, 255, 255, 255),
@@ -42,9 +48,10 @@ class ResultScreen extends StatelessWidget {
             const SizedBox(height: 20),
             QuestionSummary(getSummaryData()),
             const SizedBox(height: 20),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: function1,
-              child: const Text("Restart Quiz"),
+              icon: Icon(Icons.restart_alt_outlined, weight: 30),
+              label: const Text("Restart Quiz"),
             ),
           ],
         ),
